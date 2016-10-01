@@ -32,7 +32,7 @@ class ClassroomsController < ApplicationController
     student_id = @classroom.student_id 
     course_id = @classroom.course_id
 
-    if Classroom.exists?(['student_id LIKE ? AND course_id LIKE ?', student_id, course_id ])
+    if Classroom.exists?(['cast(student_id as text) LIKE ? AND cast(course_id as text) LIKE ?', student_id.to_s, course_id.to_s ])
       @classroom = Classroom.new
       @courses = Course.all
       @students = Student.all
