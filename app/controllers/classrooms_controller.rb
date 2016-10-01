@@ -13,9 +13,10 @@ class ClassroomsController < ApplicationController
   end
 
   def new
+    status = 1
     @classroom = Classroom.new
-    @courses = Course.where("cast(status as integer) LIKE '1'")
-    @students = Student.where("cast(status as integer) LIKE '1'")
+    @courses = Course.where("status LIKE ?", status.to_s)
+    @students = Student.where("status LIKE ?", status.to_s)
     respond_with(@classroom)
   end
 

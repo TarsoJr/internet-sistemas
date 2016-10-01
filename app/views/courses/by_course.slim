@@ -25,7 +25,7 @@ br
                 th = t('register_number')
 
             tbody
-            - todas_as_classes_de_id = Classroom.where("cast(course_id AS integer) LIKE '?'", course.id)
+            - todas_as_classes_de_id = Classroom.where("course_id LIKE ?", course.id.to_s)
             - ids_alunos = Array.new
             - todas_as_classes_de_id.each do |alunos|
               - ids_alunos << alunos.student_id
