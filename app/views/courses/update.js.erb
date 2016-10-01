@@ -1,0 +1,8 @@
+$("#myupdatecourse_<%= @course.id %>").modal('hide');
+
+$("#course_<%= @course.id %>").fadeOut(500, function(){
+
+  $(this).remove();
+  $("container_courses").prepend('<%= j render @course %>');
+  
+});

@@ -1,0 +1,27 @@
+h1 = t('listing_classrooms')
+
+
+div cllinktass="table-responsive" 
+  table.table
+    thead
+      tr
+        th = t('student')
+        th = t('course')
+        th = t('entry_at')
+        th = t('show')
+        th = t('edit')
+        th = t('destroy')
+
+    tbody
+      - @classrooms.each do |classroom|
+        tr class="#{cycle('list_line_odd', 'list_line_even')}"
+          td = classroom.student.name
+          td = classroom.course.name
+          td = l(classroom.entry_at.to_date)
+          td = link_to t('show'), classroom, :class => 'btn btn-xs btn-default'
+          td = link_to t('edit'), edit_classroom_path(classroom), :class => 'btn btn-xs btn-warning'
+          td = link_to t('destroy'), classroom, :class => 'btn btn-xs btn-danger', method: :delete, data: { confirm: 'Are you sure?' }
+
+br
+
+= link_to t('new_classroom'), new_classroom_path

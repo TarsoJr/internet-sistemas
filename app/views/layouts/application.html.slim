@@ -1,0 +1,58 @@
+doctype html
+html lang="en"
+  head
+    meta charset="utf-8"
+    meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    title= content_for?(:title) ? yield(:title) : "TestInternetSistemas"
+    = csrf_meta_tags
+    = stylesheet_link_tag "application", :media => "all"
+
+    /! Latest compiled and minified CSS
+    link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" rel="stylesheet" /
+    /! Optional theme
+    link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" rel="stylesheet" /
+    /! Latest compiled and minified JavaScript
+    script crossorigin="anonymous" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
+
+    = favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144'
+    = favicon_link_tag 'apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114'
+    = favicon_link_tag 'apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72'
+    = favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png'
+    = favicon_link_tag 'favicon.ico', :rel => 'shortcut icon'
+    = javascript_include_tag "application"
+
+  body
+    .navbar.navbar-default.navbar-static-top
+        .container
+          button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse"
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand href="/" Teste Internet Sistemas
+          .navbar-collapse.collapse.navbar-responsive-collapse
+            ul.nav.navbar-nav.navbar-right
+              li= link_to t('courses'), "/courses"
+              li= link_to t('courses_in_js'), "/courses_indexjs"
+              li= link_to t('students'), "/students"
+              li= link_to t('students_in_js'), "/students_indexjs"
+              li= link_to t('classrooms'), "/classrooms"
+              li= link_to t('classrooms_by_courses'), "/classrooms_by_course"
+              li.dropdown
+                a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
+                  = t('actions')
+                  span.caret
+                ul.dropdown-menu
+                  li= link_to t("new_course"), "/courses/new"
+                  li= link_to t("new_student"), "/students/new"
+                  li= link_to t("new_classroom"), "/classrooms/new"
+
+    .container
+      .row
+        .col-lg-9
+          = bootstrap_flash
+          = yield
+
+
+      footer
+        p &copy; Company 2016 -- | -- Paulo Bezerra -- | --  Desenvolvido por: tarsoadm@yahoo.com.br

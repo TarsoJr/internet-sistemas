@@ -1,0 +1,36 @@
+.container
+  .row
+    .text-center
+      /! Button trigger modal
+      button.btn.btn-success.btn-lg data-target="#mynewstudent" data-toggle="modal" type="button" 
+        = t('new_student')
+  br/
+  hr/
+  #container_students.row
+    = render @students
+  /! Modal  create action
+  = form_for(@student, remote: true) do |f|
+    #mynewstudent.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" 
+      .modal-dialog
+        .modal-register_number
+          .modal-header
+            button.close aria-label="Close" data-dismiss="modal" type="button" 
+              span aria-hidden="true"  ×
+            h4#myModalLabel.modal-name = t('student')
+          .modal-body
+            .field
+              = f.label :name, t('name')
+              br/
+              = f.text_area :name, class: "form-control student_name"
+            .field
+              = f.label :register_number, t('register_number')
+              br/
+              = f.text_area :register_number, class: "form-control student_register_number"
+            .field
+              = f.label :status, t('status')
+              br/
+              = f.select :status, status, { :prompt => 'Student Status' }, class: "form-control student_name"               
+          .modal-footer
+            button#mynewstudentclose.btn.btn-default data-dismiss="modal" type="button"  = t('close')
+            = submit_tag t('create'), class: "btn btn-primary"
+  /! Modal

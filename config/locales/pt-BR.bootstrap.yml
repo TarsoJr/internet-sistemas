@@ -1,0 +1,25 @@
+pt-BR:
+  breadcrumbs:
+    application:
+      root: "Index"
+    pages:
+      pages: "Páginas"
+  helpers:
+    actions: "Ações"
+    links:
+      back: "Voltar"
+      cancel: "Cancelar"
+      confirm: "Você tem certeza?"
+      destroy: "Deletar"
+      new: "Novo"
+      edit: "Alterar"
+    titles:
+      edit: "Alterar %{model}"
+      save: "Salvar %{model}"
+      new: "Novo %{model}"
+      delete: "Deletar %{model}"
+    model:
+      course: "curso"
+      classroom: "classe"
+      student: "aluno"
+

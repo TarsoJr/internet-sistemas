@@ -1,0 +1,26 @@
+h1 = t('listing_courses')
+
+div cllinktass="table-responsive" 
+  table.table
+    thead
+      tr
+        th = t('name')
+        th = t('description')
+        th = t('status')
+        th = t('show')
+        th = t('edit')
+        th = t('destroy')
+
+    tbody
+      - @courses.each do |course|
+        tr class="#{cycle('list_line_odd', 'list_line_even')}"
+          td = course.name
+          td = course.description
+          td = RegisterStatus.t(course.status)
+          td = link_to t('show'), course, :class => 'btn btn-xs btn-default'
+          td = link_to t('edit'), edit_course_path(course), :class => 'btn btn-xs btn-warning'
+          td = link_to t('destroy'), course, :class => 'btn btn-xs btn-danger', method: :delete, data: { confirm: 'Are you sure?' }
+
+br
+
+= link_to t('new_course'), new_course_path, class: "btn btn-success"

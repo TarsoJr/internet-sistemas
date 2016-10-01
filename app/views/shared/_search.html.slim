@@ -1,0 +1,9 @@
+    = form_tag '#', method: :get  do
+      .form-group.row.text-center.col-md-12
+      	.col-md-6
+        = text_field_tag :descricao, @student_searched, class: "form-control search-box input-lg'"
+        .col-md-2
+        = button_to "Buscar", nil, class: "btn btn-default"
+        
+
+

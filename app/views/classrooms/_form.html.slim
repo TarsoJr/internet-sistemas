@@ -1,0 +1,25 @@
+= form_for @classroom do |f|
+  - if @classroom.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@classroom.errors.count, "error")} prohibited this classroom from being saved:"
+      ul
+        - @classroom.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :student_id, t('student') 
+    
+    br/
+    = collection_select( :classroom, :student_id, @students, :id, :name, {}, { :multiple => false })
+    
+  .field
+    = f.label :course_id, t('course')
+    
+    br/
+    = collection_select( :classroom, :course_id, @courses, :id, :name, {}, { :multiple => false })
+    
+  .field
+    = f.label :entry_at, t('entry_at')
+    br/
+    = f.datetime_select :entry_at
+  .actions = f.submit

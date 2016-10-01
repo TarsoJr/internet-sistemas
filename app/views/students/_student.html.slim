@@ -1,0 +1,42 @@
+.col-md-4.blog-main.box.text-center id="student_#{student.id}" 
+  .panel.panel-info
+    /! Panel Info
+    .panel-heading
+      h3.panel-name= student.name
+      p= student.register_number
+    .panel-body
+      /! Panel Body
+      div style=("color: #3BB2D6;") = time_ago_in_words(student.created_at)
+      br/
+      .btn-group aria-label="..." role="group" 
+        button.btn.btn-warning data-target="#myupdatestudent_#{student.id}" data-toggle="modal" type="button" 
+          = t('edit')
+        = link_to t('delete'), student, method: :delete, class: "btn btn-danger", remote: true
+    /! Panel Body
+  /! Panel Info
+  /! Modal - update students
+  = form_for(student, :method => :put, remote: true) do |f|
+    .modal.fade aria-hidden="true" aria-labelledby="myModalLabel" id="myupdatestudent_#{student.id}" role="dialog" tabindex="-1" 
+      .modal-dialog
+        .modal-register_number
+          .modal-header
+            button.close aria-label="Close" data-dismiss="modal" type="button" 
+              span aria-hidden="true"  ×
+            h4#myModalLabel.modal-name = t('edit')
+          .modal-body
+            .field
+              = f.label :name, t('name')
+              br/
+              = f.text_area :name, class: "form-control"
+            .field
+              = f.label :register_number, t('register_number')
+              br/
+              = f.text_area :register_number, class: "form-control"
+            .field
+              = f.label :status, t('status')
+              br/
+              = f.select :status, status, { :prompt => 'Student Status' }, class: "form-control student_name" 
+          .modal-footer
+            button.btn.btn-default data-dismiss="modal" id="myupdatebutton_#{student.id}" type="button"  = t('close')
+            = submit_tag t('update'), class: "btn btn-primary"
+  /! Modal

@@ -1,0 +1,8 @@
+$("#myupdatestudent_<%= @student.id %>").modal('hide');
+
+$("#student_<%= @student.id %>").fadeOut(500, function(){
+
+	$(this).remove();
+	$("container_students").prepend('<%= j render @student %>');
+	
+});

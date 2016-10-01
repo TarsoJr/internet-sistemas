@@ -1,0 +1,9 @@
+$("#mynewstudent").modal('hide');
+$(".student_name").val('');
+$(".student_register_number").val('');
+$(".student_status").val('');
+
+$("#container_students").prepend('<%= j render @student %>');
+$("#student_<%= @student.id %>").hide().fadeIn(1000);
+
+

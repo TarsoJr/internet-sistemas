@@ -1,0 +1,28 @@
+h1 = t('listing_studants')
+
+
+div cllinktass="table-responsive" 
+
+  table.table
+    thead
+      tr
+        th = t('name')
+        th = t('register_number')
+        th = t('status')
+        th = t('show')
+        th = t('edit')
+        th = t('destroy')
+
+    tbody
+      - @students.each do |student|
+        tr class="#{cycle('list_line_odd', 'list_line_even')}"
+          td = student.name
+          td = student.register_number
+          td = RegisterStatus.t(student.status)
+          td = link_to t('show'), student, :class => 'btn btn-xs btn-default'
+          td = link_to t('edit'), edit_student_path(student), :class => 'btn btn-xs btn-primary'
+          td = link_to t('destroy'), student, :class => 'btn btn-xs btn-danger', data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to t('new_student'), new_student_path

@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Student:
+  = @classroom.student.name
+p
+  strong Course:
+  = @classroom.course.name
+p
+  strong Entry_at:
+  = l(@classroom.entry_at.to_date)
+
+= link_to "Edit", edit_classroom_path(@classroom), class: "btn btn-warning"
+'|
+= link_to 'Back', classrooms_path, class: "btn btn-secondary"

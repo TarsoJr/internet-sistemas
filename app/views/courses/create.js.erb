@@ -1,0 +1,9 @@
+$("#mynewcourse").modal('hide');
+$(".course_name").val('');
+$(".course_description").val('');
+$(".course_status").val('');
+
+$("#container_courses").prepend('<%= j render @course %>');
+$("#course_<%= @course.id %>").hide().fadeIn(1000);
+
+
