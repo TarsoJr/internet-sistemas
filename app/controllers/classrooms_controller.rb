@@ -15,14 +15,14 @@ class ClassroomsController < ApplicationController
   def new
     status = 1
     @classroom = Classroom.new
-    @courses = Course.where("status LIKE ?", status.to_s)
-    @students = Student.where("status LIKE ?", status.to_s)
+    @courses = Course.all
+    @students = Student.all
     respond_with(@classroom)
   end
 
   def edit
-    @courses = Course.where("status LIKE 1")
-    @students = Student.where("status LIKE 1")
+    @courses = Course.all
+    @students = Student.all
 
   end
 
