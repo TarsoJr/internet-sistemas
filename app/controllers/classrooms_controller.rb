@@ -1,10 +1,10 @@
 class ClassroomsController < ApplicationController
   before_action :set_classroom, only: [:show, :edit, :update, :destroy]
+  before_action :set_students_and_courses, only: [:new, :create, :edit, :update]
   respond_to :html
 
   def index
     @classrooms = Classroom.all
-    #@classrooms = Classroom.joins(:student).joins(:course)
     respond_with(@classrooms)
   end
 
@@ -13,53 +13,23 @@ class ClassroomsController < ApplicationController
   end
 
   def new
-    status = 1
     @classroom = Classroom.new
-    @courses = Course.all
-    @students = Student.all
     respond_with(@classroom)
   end
 
   def edit
-    @courses = Course.all
-    @students = Student.all
-
   end
 
   def create
     @classroom = Classroom.new(classroom_params)
-
-    student_id = @classroom.student_id 
-    course_id = @classroom.course_id
-
-    if Classroom.exists?(['cast(student_id as text) LIKE ? AND cast(course_id as text) LIKE ?', student_id.to_s, course_id.to_s ])
-      @classroom = Classroom.new
-      @courses = Course.all
-      @students = Student.all
-      flash[:error] = t('duplicate_class_error')
-      render 'new'
-    else
-      @classroom.save
-      respond_with(@classroom)
-    end 
+    @classroom.save
+    respond_with(@classroom)
     
   end
 
   def update
-    student_id = @classroom.student_id 
-    course_id = @classroom.course_id
-
-    if Classroom.exists?(['student_id LIKE ? AND course_id LIKE ?', student_id, course_id ])
-      @classroom = Classroom.new
-      @courses = Course.all
-      @students = Student.all
-      flash[:error] = t('duplicate_class_error')
-      render 'new'
-    else
-      @classroom.update(classroom_params)
-      respond_with(@classroom)
-    end
-
+    @classroom.update(classroom_params)
+    respond_with(@classroom)
   end
 
   def destroy
@@ -75,6 +45,11 @@ class ClassroomsController < ApplicationController
 
     def classroom_params
       params.require(:classroom).permit(:student_id, :course_id, :entry_at)
+    end
+
+    def set_students_and_courses
+      @courses = Course.where(status: 1)
+      @students = Student.where(status: 1)
     end
 
 end

@@ -1,6 +1,7 @@
 h1 align="center"  = t('listing_all_classrooms')
 br
-div align="center"  = link_to t('new_classroom'), new_classroom_path, class: "btn btn-success"
+.center
+= link_to t('new_classroom'), new_classroom_path, class: "btn btn-success"
 br
 br
 - @courses.each do |course|
@@ -24,11 +25,15 @@ br
                 th = t('register_number')
 
             tbody
-            - course.students.each do |cs|
+            - todas_as_classes_de_id = Classroom.where("cast(course_id as text) LIKE ?", course.id.to_s)
+            - ids_alunos = Array.new
+            - todas_as_classes_de_id.each do |alunos|
+              - ids_alunos << alunos.student_id
+            - ids_alunos.each do |id|
 
               tr class="#{cycle('list_line_odd', 'list_line_even')}"
-                td = link_to cs.name
-                td = cs.register_number
+                td = link_to Student.find(id).name, student_path(id)
+                td = Student.find(id).register_number 
 
 
           .classroom-actions

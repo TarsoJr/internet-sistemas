@@ -2,7 +2,7 @@ h1 Editing course
 
 == render 'form'
 
-= link_to 'Show', @course
+= link_to t('show'), @course, class: 'btn btn-xs btn-default'
 '|
-= link_to 'Back', courses_path
+= link_to t('back'), courses_path, class: "btn btn-secondary"
 

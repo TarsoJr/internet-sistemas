@@ -1,15 +1,17 @@
 p#notice = notice
 
 p
-  strong Name:
+  strong #{t('name')}:
+  ' &nbsp; 
   = @course.name
 p
-  strong Description:
+  strong #{t('description')}:
+  ' &nbsp; 
   = @course.description
 p
   strong Status:
   = RegisterStatus.t(@course.status)
 
-= link_to 'Edit', edit_course_path(@course), class: "btn btn-warning"
+= link_to t('edit'), edit_course_path(@course), class: "btn btn-warning"
 '|
-= link_to 'Back', courses_path, class: "btn btn-secondary"
+= link_to t('back'), courses_path, class: "btn btn-secondary"
